@@ -1,0 +1,73 @@
+.profile {
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto 1fr auto;
+  max-width: 880px;
+  padding: 0;
+}
+
+.profile__avatar {
+  border-radius: 50%;
+  max-width: 120px;
+  max-height: 120px;
+}
+
+.profile__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__info {
+  display: flex;
+  max-width: 415px;
+  margin: 0;
+  padding: 22px 0 21px 30px;
+  gap: 18px;
+  align-content: center;
+}
+
+.profile__name {
+  margin: 0;
+  font-family: "Inter 500";
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile__bio {
+  font-family: "Inter 400";
+  font-size: 18px;
+  margin: 0 30px 0;
+  max-width: 415px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.profile__edit-button {
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.6;
+}
+
+.profile__add {
+  align-self: center;
+  background-color: transparent;
+  max-width: 150px;
+  max-height: 50px;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.profile__add:hover {
+  opacity: 0.6;
+}

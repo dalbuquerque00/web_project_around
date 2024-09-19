@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: auto;
+  gap: 41px;
+  width: fit-content;
+}
+.header__logo {
+  max-width: 173px;
+}
+
+.header__rule {
+  max-width: 880px;
+}
