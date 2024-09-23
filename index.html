@@ -43,47 +43,147 @@
             />
           </button>
           <!-- Zona para o popup  -->
-          <!--<section class="popup">
+          <section class="popup">
             <div class="popup__box">
-              <button type="button" class="popup__button-exit">
+              <button type="button" class="popup__close-button">
                 <img
                   src="images/UIkit/Close Icon.png"
                   alt="Botão para sair do popup"
                 />
               </button>
+              <div class="popup__content">
+                <h2 class="popup__title">Editar Perfil</h2>
+                <form class="popup__form">
+                  <label for="popup__input-name" class="popup__label"
+                    >Nome</label
+                  >
+                  <input
+                    type="text"
+                    id="popup__input-name"
+                    name="nome"
+                    minlength="2"
+                    maxlength="40"
+                    required
+                    placeholder="Nome"
+                    class="popup__input"
+                  />
+                  <label for="popup__input-about" class="popup__label"
+                    >Sobre mim</label
+                  >
+                  <input
+                    type="text"
+                    id="popup__input-about"
+                    name="Sobre mim"
+                    minlength="2"
+                    maxlength="240"
+                    required
+                    placeholder="Sobre mim"
+                    class="popup__input"
+                  />
+                  <button type="submit" class="popup__button-save" disabled>
+                    Salvar
+                  </button>
+                </form>
+              </div>
             </div>
-            <div class="popup__content">
-              <h2 class="popup__title">Editar Perfil</h2>
-              <form class="popup__form">
-                <label for="popup__input-name">Nome</label>
-                <input
-                  type="text"
-                  id="popup__input-name"
-                  name="nome"
-                  minlength="2"
-                  maxlength="40"
-                  required
-                />
-                <label for="popup__input-about">Sobre mim</label>
-                <input
-                  type="text"
-                  id="popup__input-about"
-                  name="Sobre mim"
-                  minlength="2"
-                  maxlength="240"
-                  required
-                />
-                <button type="submit" class="popup__button-save" disabled>
-                  Salvar
-                </button>
-              </form>
-            </div>
-          </section>-->
+          </section>
           <!-- fim da zona de popup  -->
         </section>
-        <section class=""></section>
+        <section class="elements">
+          <div class="element">
+            <img
+              class="element__image"
+              src="images/kirill-pershin-1088404-unsplash.jpg"
+              alt="image cards"
+            />
+            <div class="element__card-bottom">
+              <p class="element__name">Vale de Yosemite</p>
+              <img
+                class="element__like"
+                src="images/UIkit/like.png"
+                alt="Like button"
+              />
+            </div>
+          </div>
+          <div class="element">
+            <img
+              class="element__image"
+              src="images/kirill-pershin-1404681-unsplash.png"
+              alt="image cards"
+            />
+            <div class="element__card-bottom">
+              <p class="element__name">Lago Louise</p>
+              <img
+                class="element__like"
+                src="images/UIkit/like.png"
+                alt="Like button"
+              />
+            </div>
+          </div>
+          <div class="element">
+            <img
+              class="element__image"
+              src="images/kirill-pershin-1556355-unsplash.png"
+              alt="image cards"
+            />
+            <div class="element__card-bottom">
+              <p class="element__name">Montanhas</p>
+              <img
+                class="element__like"
+                src="images/UIkit/like.png"
+                alt="Like button"
+              />
+            </div>
+          </div>
+          <div class="element">
+            <img
+              class="element__image"
+              src="images/kirill-pershin-1404681-unsplash (1).png"
+              alt="image cards"
+            />
+            <div class="element__card-bottom">
+              <p class="element__name">Latemar</p>
+              <img
+                class="element__like"
+                src="images/UIkit/like.png"
+                alt="Like button"
+              />
+            </div>
+          </div>
+          <div class="element">
+            <img
+              class="element__image"
+              src="images/kirill-pershin-1556355-unsplash (1).png"
+              alt="image cards"
+            />
+            <div class="element__card-bottom">
+              <p class="element__name">Parque Nacional da Vanoise</p>
+              <img
+                class="element__like"
+                src="images/UIkit/like.png"
+                alt="Like button"
+              />
+            </div>
+          </div>
+          <div class="element">
+            <img
+              class="element__image"
+              src="images/kirill-pershin-1088404-unsplash.png"
+              alt="image cards"
+            />
+            <div class="element__card-bottom">
+              <p class="element__name">Lago di Braies</p>
+              <img
+                class="element__like"
+                src="images/UIkit/like.png"
+                alt="Like button"
+              />
+            </div>
+          </div>
+        </section>
       </main>
       <footer class="footer"></footer>
     </div>
+    <script src="pages/index.js"></script>
   </body>
 </html>

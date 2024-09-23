@@ -10,6 +10,6 @@
 
 @import url("../blocks/content.css");
 
-@import url("../blocks/");
+@import url("../blocks/element.css");
 
-@import url("../");
+@import url("../blocks/popup.css");
