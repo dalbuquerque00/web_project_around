@@ -25,9 +25,8 @@ closeButton.addEventListener("click", closePopup);
 
 // Função para salvar as informações do formulário
 function saveProfile(event) {
-  event.preventDefault(); // Evita que a página recarregue ao enviar o formulário
+  event.preventDefault();
 
-  // Atualiza o perfil com os valores do formulário
   profileName.textContent = nameInput.value;
   profileBio.textContent = aboutInput.value;
 

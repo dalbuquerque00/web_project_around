@@ -5,6 +5,7 @@
   margin: auto;
   gap: 41px;
   width: fit-content;
+  padding-top: 45px;
 }
 .header__logo {
   max-width: 173px;
@@ -12,4 +13,28 @@
 
 .header__rule {
   max-width: 880px;
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .header {
+    max-width: 680px;
+    margin: auto;
+  }
+
+  .header__rule {
+    max-width: 680px;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .header__logo {
+    max-width: 126px;
+    margin-top: 28px;
+    margin-left: 27px;
+  }
+
+  .header__rule {
+    max-width: 100%;
+    margin: 0;
+  }
 }
