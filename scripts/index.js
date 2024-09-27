@@ -1,10 +1,10 @@
-let editProfile = document.querySelector(".profile__edit-button");
-let closeButton = document.querySelector(".popup__close-button");
-let saveform = document.querySelector(".popup__form"); // Seleciona o formulário
-let nameInput = document.querySelector("#popup__input-name");
-let aboutInput = document.querySelector("#popup__input-about");
-let profileName = document.querySelector(".profile__name");
-let profileBio = document.querySelector(".profile__bio");
+const editProfile = document.querySelector(".profile__edit-button");
+const closeButton = document.querySelector(".popup__close-button");
+const saveform = document.querySelector(".popup__form"); // Seleciona o formulário
+const nameInput = document.querySelector("#popup__input-name");
+const aboutInput = document.querySelector("#popup__input-about");
+const profileName = document.querySelector(".profile__name");
+const profileBio = document.querySelector(".profile__bio");
 
 // Função para abrir o popup
 function openPopup() {

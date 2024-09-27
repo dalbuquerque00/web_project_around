@@ -32,8 +32,8 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 1.1;
+  overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .profile__bio {
