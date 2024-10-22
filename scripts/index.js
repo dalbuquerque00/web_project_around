@@ -5,7 +5,8 @@ const nameInput = document.querySelector("#popup__input-name");
 const aboutInput = document.querySelector("#popup__input-about");
 const profileName = document.querySelector(".profile__name");
 const profileBio = document.querySelector(".profile__bio");
-//variaveis para adição ad imagem
+
+// Variáveis para adição de imagem
 const addImageButton = document.querySelector(".profile__add");
 const addImagePopup = document.querySelector(".new__img-box");
 const addImageForm = document.querySelector(".new__img-form");
@@ -16,7 +17,13 @@ const closeAddImagePopupButton = document.querySelector(
   ".new__img_close-button"
 );
 
-// Função para abrir o popup
+// Variáveis para expandir imagem
+const imagePopup = document.querySelector(".element__image-popup");
+const expandedImage = document.querySelector(".element__image-main");
+const expandedImageTitle = document.querySelector(".element__image-name");
+const closeImagePopupButton = document.querySelector("#expand__popup-close");
+
+// Função para abrir o popup de perfil
 function openPopup() {
   document.querySelector(".popup__box").classList.add("popup_opened");
 
@@ -26,7 +33,7 @@ function openPopup() {
 
 editProfile.addEventListener("click", openPopup);
 
-// Função para fechar o popup
+// Função para fechar o popup de perfil
 function closePopup() {
   document.querySelector(".popup__box").classList.remove("popup_opened");
 }
@@ -45,104 +52,11 @@ function saveProfile(event) {
 
 saveform.addEventListener("submit", saveProfile);
 
-//Imagens iniciais
-
-const initialCards = [
-  {
-    name: "Vale de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-  },
-  {
-    name: "Montanhas Carecas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
-  },
-  {
-    name: "Parque Nacional da Vanoise ",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
-  },
-];
-
-const elementsContainer = document.querySelector(".elements");
-
-function createCard(card) {
-  // Cria o elemento do cartão
-  const cardElement = document.createElement("div");
-  cardElement.classList.add("element");
-
-  // Cria a imagem do cartão
-  const cardImage = document.createElement("img");
-  cardImage.classList.add("element__image");
-  cardImage.src = card.link;
-  cardImage.alt = card.name;
-
-  // Cria nome e o like no cartão
-  const cardBottom = document.createElement("div");
-  cardBottom.classList.add("element__card-bottom");
-
-  const cardName = document.createElement("p");
-  cardName.classList.add("element__name");
-  cardName.textContent = card.name;
-
-  const cardLike = document.createElement("img");
-  cardLike.classList.add("element__like");
-  cardLike.src = "images/UIkit/Like.png";
-  cardLike.alt = "Botão de like";
-
-  // Adiciona o nome e o botão de like ao cardBottom
-  cardBottom.appendChild(cardName);
-  cardBottom.appendChild(cardLike);
-
-  // Cria o ícone de lixeira
-  const cardTrash = document.createElement("div");
-  cardTrash.classList.add("element__trash");
-
-  const cardTrashIcon = document.createElement("img");
-  cardTrashIcon.classList.add("element__trash-icon");
-  cardTrashIcon.src = "images/UIkit/Trash.png";
-  cardTrashIcon.alt = "Ícone de lixeiro";
-
-  // Adiciona o ícone de lixeira ao cardTrash
-  cardTrash.appendChild(cardTrashIcon);
-
-  // Monta o card: adiciona a imagem, cardBottom e cardTrash ao cardElement
-  cardElement.appendChild(cardImage);
-  cardElement.appendChild(cardBottom);
-  cardElement.appendChild(cardTrash);
-  // Excluir a foto
-  cardTrashIcon.addEventListener("click", function () {
-    cardElement.remove();
-  });
-
-  return cardElement;
-}
-
-function renderCards() {
-  initialCards.forEach((card) => {
-    const cardElement = createCard(card);
-    elementsContainer.appendChild(cardElement);
-  });
-}
-
-renderCards();
-
 // Função para abrir o popup de adicionar imagem
 function openAddImagePopup() {
   addImagePopup.classList.add("popup_opened");
 }
 
-// Evento para abrir o popup ao clicar no botão add
 addImageButton.addEventListener("click", openAddImagePopup);
 
 // Função para fechar o popup de adicionar imagem
@@ -150,7 +64,6 @@ function closeAddImagePopup() {
   addImagePopup.classList.remove("popup_opened");
 }
 
-// Evento para fechar o popup ao clicar no botão de fechar
 closeAddImagePopupButton.addEventListener("click", closeAddImagePopup);
 
 // Função para adicionar uma nova imagem
@@ -178,6 +91,7 @@ function addNewImage(event) {
 // Enviar a imagem nova
 addImageForm.addEventListener("submit", addNewImage);
 
+// Verificação do formulário
 titleInput.addEventListener("input", checkFormValidity);
 urlInput.addEventListener("input", checkFormValidity);
 
@@ -188,3 +102,124 @@ function checkFormValidity() {
     saveButton.setAttribute("disabled", true);
   }
 }
+
+// Função para abrir o popup de imagem expandida
+function openImagePopup(imageSrc, imageAlt) {
+  expandedImage.src = imageSrc;
+  expandedImage.alt = imageAlt;
+  expandedImageTitle.textContent = imageAlt; // O título da imagem será o alt
+  imagePopup.classList.add("popup_opened");
+}
+
+// Função para fechar o popup de imagem expandida
+function closeImagePopup() {
+  imagePopup.classList.remove("popup_opened");
+}
+
+// Evento para fechar o popup de imagem expandida
+closeImagePopupButton.addEventListener("click", closeImagePopup);
+
+// Imagens iniciais
+const initialCards = [
+  {
+    name: "Vale de Yosemite",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
+  },
+  {
+    name: "Lago Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
+  },
+  {
+    name: "Montanhas Carecas",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
+  },
+  {
+    name: "Parque Nacional da Vanoise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
+  },
+];
+
+const elementsContainer = document.querySelector(".elements");
+
+// Função para criar o card
+function createCard(card) {
+  // Cria o elemento do cartão
+  const cardElement = document.createElement("div");
+  cardElement.classList.add("element");
+
+  // Cria a imagem do cartão
+  const cardImage = document.createElement("img");
+  cardImage.classList.add("element__image");
+  cardImage.src = card.link;
+  cardImage.alt = card.name;
+
+  // Adiciona evento de clique para expandir a imagem
+  cardImage.addEventListener("click", () => {
+    openImagePopup(card.link, card.name); // Expande a imagem ao clicar
+  });
+
+  // Cria nome e o like no cartão
+  const cardBottom = document.createElement("div");
+  cardBottom.classList.add("element__card-bottom");
+
+  const cardName = document.createElement("p");
+  cardName.classList.add("element__name");
+  cardName.textContent = card.name;
+
+  const cardLike = document.createElement("img");
+  cardLike.classList.add("element__like");
+  cardLike.src = "images/UIkit/like.svg";
+  cardLike.alt = "Botão de like";
+
+  // Mudança do botão de like
+  cardLike.addEventListener("click", function () {
+    if (cardLike.src.includes("like.svg")) {
+      cardLike.src = "images/UIkit/like_black.png";
+    } else {
+      cardLike.src = "images/UIkit/like.svg";
+    }
+  });
+
+  cardBottom.appendChild(cardName);
+  cardBottom.appendChild(cardLike);
+
+  // Lixeira
+  const cardTrash = document.createElement("div");
+  cardTrash.classList.add("element__trash");
+
+  const cardTrashIcon = document.createElement("img");
+  cardTrashIcon.classList.add("element__trash-icon");
+  cardTrashIcon.src = "images/UIkit/Trash.png";
+  cardTrashIcon.alt = "Ícone de lixeiro";
+
+  cardTrash.appendChild(cardTrashIcon);
+
+  // Excluir a foto
+  cardTrashIcon.addEventListener("click", function () {
+    cardElement.remove();
+  });
+
+  cardElement.appendChild(cardImage);
+  cardElement.appendChild(cardBottom);
+  cardElement.appendChild(cardTrash);
+
+  return cardElement;
+}
+
+// Renderizar os cards iniciais
+function renderCards() {
+  initialCards.forEach((card) => {
+    const cardElement = createCard(card);
+    elementsContainer.appendChild(cardElement);
+  });
+}
+
+renderCards();

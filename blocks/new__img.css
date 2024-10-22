@@ -76,3 +76,33 @@
   cursor: pointer;
   position: relative;
 }
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .new__img-content {
+    width: 282px;
+  }
+
+  .new__img-title {
+    font-size: 18px;
+    padding-top: 35px;
+    padding-bottom: 76px;
+    padding-left: 20px;
+  }
+
+  .new__img_input {
+    width: 238px;
+    height: 26px;
+    margin: 0 auto;
+  }
+
+  .new__img_save-button {
+    width: 238px;
+    height: 46px;
+    margin: 16px auto 25px;
+  }
+
+  .new__img_close-button {
+    top: -23px;
+    left: 153px;
+  }
+}
