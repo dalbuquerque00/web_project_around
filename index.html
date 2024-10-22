@@ -88,118 +88,86 @@
               </div>
             </div>
           </section>
-          <!-- fim da zona de popup de edição da bio  -->
-           <section class="new_img">
+          <!-- fim da zona de popup de edição da bio  e inicio do popup para adiçao de imagens -->
+          <section class="new_img">
             <div class="new__img-box">
-              <button type="button" class="new__img_close-button po
-              pup__close-button"><img src="images/UIkit/Close Icon.png" alt="botão de fechar">
-            </button>
-            <div class="new__img-content">
-              <h3 class="new__img-title">Novo local</h3>
-              <form class="new__igm-form">
-                <label for="new__igm_input-name">Título</label>
-                <input type="text" name="Título" id="new__img_input-name" class="new__igm_input" placeholder="Novo local">
-                <label for="new__igm_input-url">Url</label>
-                <input type="url" name="Url" id="new__img_input-url" class="new__igm_input" placeholder="Url da imagem">
-              </form>
+              <button
+                type="button"
+                class="new__img_close-button po pup__close-button"
+              >
+                <img src="images/UIkit/Close Icon.png" alt="botão de fechar" />
+              </button>
+              <div class="new__img-content">
+                <h3 class="new__img-title">Novo local</h3>
+                <form class="new__img-form">
+                  <label for="new__img_input-name" class="new__img-label"
+                    >Título</label
+                  >
+                  <input
+                    type="text"
+                    name="Título"
+                    id="new__img_input-name"
+                    class="new__img_input"
+                    placeholder="Novo local"
+                  />
+                  <label for="new__img_input-url" class="new__img-label"
+                    >Url</label
+                  >
+                  <input
+                    type="url"
+                    name="Url"
+                    id="new__img_input-url"
+                    class="new__img_input"
+                    placeholder="Url da imagem"
+                  />
+                  <button type="submit" class="new__img_save-button" disabled>
+                    Salvar
+                  </button>
+                </form>
+              </div>
             </div>
-            </div>
-           </section>
+          </section>
         </section>
+        <!--Grid adição de imagens-->
         <section class="elements">
-          <div class="element">
-            <img
-              class="element__image"
-              src="images/kirill-pershin-1088404-unsplash.jpg"
-              alt="image cards"
-            />
-            <div class="element__card-bottom">
-              <p class="element__name">Vale de Yosemite</p>
+          <template>
+            <div class="element">
               <img
-                class="element__like"
-                src="images/UIkit/like.svg"
-                alt="Like button"
+                class="element__image"
+                src="scripts/index.js"
+                alt="imagem do cartão"
               />
+              <div class="element__card-bottom">
+                <p class="element__name"></p>
+                <img class="element__like" src="" alt="Botão de like" />
+              </div>
+              <!--Excluir fotos-->
+              <div class="element__trash">
+                <img
+                  class="element__trash-icon"
+                  src="images/UIkit/Trash.png"
+                  alt="Icone de lixeiro"
+                />
+              </div>
             </div>
-          </div>
-          <div class="element">
-            <img
-              class="element__image"
-              src="images/kirill-pershin-1404681-unsplash.png"
-              alt="image cards"
-            />
-            <div class="element__card-bottom">
-              <p class="element__name">Lago Louise</p>
-              <img
-                class="element__like"
-                src="images/UIkit/like.svg"
-                alt="Like button"
-              />
-            </div>
-          </div>
-          <div class="element">
-            <img
-              class="element__image"
-              src="images/kirill-pershin-1556355-unsplash.png"
-              alt="image cards"
-            />
-            <div class="element__card-bottom">
-              <p class="element__name">Montanhas</p>
-              <img
-                class="element__like"
-                src="images/UIkit/like.svg"
-                alt="Like button"
-              />
-            </div>
-          </div>
-          <div class="element">
-            <img
-              class="element__image"
-              src="images/kirill-pershin-1404681-unsplash (1).png"
-              alt="image cards"
-            />
-            <div class="element__card-bottom">
-              <p class="element__name">Latemar</p>
-              <img
-                class="element__like"
-                src="images/UIkit/like.svg"
-                alt="Like button"
-              />
-            </div>
-          </div>
-          <div class="element">
-            <img
-              class="element__image"
-              src="images/kirill-pershin-1556355-unsplash (1).png"
-              alt="image cards"
-            />
-            <div class="element__card-bottom">
-              <p class="element__name">Parque Nacional da Vanoise</p>
-              <img
-                class="element__like"
-                src="images/UIkit/like.svg"
-                alt="Like button"
-              />
-            </div>
-          </div>
-          <div class="element">
-            <img
-              class="element__image"
-              src="images/kirill-pershin-1088404-unsplash.png"
-              alt="image cards"
-            />
-            <div class="element__card-bottom">
-              <p class="element__name">Lago di Braies</p>
-              <img
-                class="element__like"
-                src="images/UIkit/like.svg"
-                alt="Like button"
-              />
+          </template>
+          <!--Expandir as imagens-->
+          <div class="element__image-popup">
+            <div class="element__box">
+              <button
+                class="element__button-close"
+                type="button"
+                id="expand__popup-close"
+              >
+                <img src="images/UIkit/Close Icon.png" alt="Botão de fechar" />
+              </button>
+              <img class="element__image-main" src="javascript" alt="Image" />
+              <h4 class="element__image-name"></h4>
             </div>
           </div>
         </section>
       </main>
-      <footer class="footer">&#169 2024 Around the U.S</footer>
+      <footer class="footer">&#169; 2024 Around the U.S</footer>
     </div>
     <script src="scripts/index.js"></script>
   </body>
