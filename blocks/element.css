@@ -101,7 +101,7 @@
 
 .element__image-main {
   max-width: 75vw;
-  max-height: 75vh;
+  height: 75vh;
 }
 
 .element__button-close {
