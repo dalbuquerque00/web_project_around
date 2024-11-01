@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Pagina social para exoloradores adicionarem suas fotos"
+      content="Página social para exploradores adicionarem suas fotos"
     />
     <meta name="author" content="Danilo Morais" />
     <link rel="stylesheet" href="pages/index.css" />
@@ -16,10 +16,10 @@
       <header class="header">
         <img
           src="images/logo.png"
-          alt="Logotipo Around the u.s"
+          alt="Logotipo Around the U.S"
           class="header__logo"
         />
-        <img src="images/UIkit/Line.png" alt="Divisoria" class="header__rule" />
+        <img src="images/UIkit/Line.png" alt="Divisória" class="header__rule" />
       </header>
       <main class="content">
         <section class="profile">
@@ -30,7 +30,7 @@
           />
           <div class="profile__content">
             <div class="profile__info">
-              <h2 class="profile__name">Jacqes Cousteau</h2>
+              <h2 class="profile__name">Jacques Cousteau</h2>
               <button type="button" class="profile__edit-button">
                 <img src="images/UIkit/Edit Button.png" alt="botão de edição" />
               </button>
@@ -43,6 +43,7 @@
               alt="botão para adicionar imagens"
             />
           </button>
+
           <!-- Zona para o popup de edição da bio -->
           <section class="popup">
             <div class="popup__box">
@@ -54,7 +55,7 @@
               </button>
               <div class="popup__content">
                 <h2 class="popup__title">Editar Perfil</h2>
-                <form class="popup__form">
+                <form class="popup__form" id="popup__form" novalidate>
                   <label for="popup__input-name" class="popup__label"
                     >Nome</label
                   >
@@ -68,59 +69,86 @@
                     placeholder="Nome"
                     class="popup__input"
                   />
+                  <span
+                    class="popup__error"
+                    id="popup__input-name-error"
+                  ></span>
+
                   <label for="popup__input-about" class="popup__label"
                     >Sobre mim</label
                   >
                   <input
                     type="text"
                     id="popup__input-about"
-                    name="Sobre mim"
+                    name="sobre"
                     minlength="2"
-                    maxlength="240"
+                    maxlength="200"
                     required
                     placeholder="Sobre mim"
                     class="popup__input"
                   />
-                  <button type="submit" class="popup__button-save">
+                  <span
+                    class="popup__error"
+                    id="popup__input-about-error"
+                  ></span>
+
+                  <button type="submit" class="popup__button-save" disabled>
                     Salvar
                   </button>
                 </form>
               </div>
             </div>
           </section>
-          <!-- fim da zona de popup de edição da bio  e inicio do popup para adiçao de imagens -->
+
+          <!-- Fim da zona de popup de edição da bio e início do popup para adição de imagens -->
           <section class="new_img">
             <div class="new__img-box">
               <button
                 type="button"
-                class="new__img_close-button po pup__close-button"
+                class="new__img_close-button"
               >
-                <img src="images/UIkit/Close Icon.png" alt="botão de fechar" />
+                <img src="images/UIkit/Close Icon.png" alt="botão de fechar"/>
               </button>
               <div class="new__img-content">
                 <h3 class="new__img-title">Novo local</h3>
-                <form class="new__img-form">
+                <form class="new__img-form" novalidate>
                   <label for="new__img_input-name" class="new__img-label"
                     >Título</label
                   >
                   <input
                     type="text"
-                    name="Título"
+                    name="titulo"
                     id="new__img_input-name"
-                    class="new__img_input"
+                    class="new__img_input popup__input"
                     placeholder="Novo local"
+                    required
                   />
+                  <span
+                    class="popup__error"
+                    id="new__img_input-name-error"
+                  ></span>
+
                   <label for="new__img_input-url" class="new__img-label"
                     >Url</label
                   >
                   <input
                     type="url"
-                    name="Url"
+                    name="url"
                     id="new__img_input-url"
-                    class="new__img_input"
+                    class="new__img_input popup__input"
                     placeholder="Url da imagem"
+                    required
                   />
-                  <button type="submit" class="new__img_save-button" disabled>
+                  <span
+                    class="popup__error"
+                    id="new__img_input-url-error"
+                  ></span>
+
+                  <button
+                    type="submit"
+                    class="new__img_save-button popup__button-save"
+                    disabled
+                  >
                     Salvar
                   </button>
                 </form>
@@ -128,7 +156,8 @@
             </div>
           </section>
         </section>
-        <!--Grid adição de imagens-->
+
+        <!-- Grid adição de imagens -->
         <section class="elements">
           <template>
             <div class="element">
@@ -145,17 +174,18 @@
                   alt="Botão de like"
                 />
               </div>
-              <!--Excluir fotos-->
+              <!-- Excluir fotos -->
               <div class="element__trash">
                 <img
                   class="element__trash-icon"
                   src="images/UIkit/Trash.png"
-                  alt="Icone de lixeiro"
+                  alt="Ícone de lixeiro"
                 />
               </div>
             </div>
           </template>
-          <!--Expandir as imagens-->
+
+          <!-- Expandir as imagens -->
           <div class="element__image-popup">
             <div class="element__box">
               <button
@@ -165,7 +195,7 @@
               >
                 <img src="images/UIkit/Close Icon.png" alt="Botão de fechar" />
               </button>
-              <img class="element__image-main" src="*" alt="Image" />
+              <img class="element__image-main" src="*" alt="Imagem" />
               <h4 class="element__image-name"></h4>
             </div>
           </div>
@@ -174,5 +204,7 @@
       <footer class="footer">&#169; 2024 Around the U.S</footer>
     </div>
     <script src="scripts/index.js"></script>
+    <script src="scripts/validate.js"></script>
+    </script>
   </body>
 </html>

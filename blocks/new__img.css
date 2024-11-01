@@ -38,7 +38,6 @@
   display: flex;
   flex-direction: column;
   margin: 0;
-  gap: 30.09px;
 }
 
 .new__img-label {
@@ -60,7 +59,7 @@
   height: 50.15px;
   background-color: rgba(0, 0, 0, 1);
   color: rgba(255, 255, 255, 1);
-  margin: 18.26px auto 36.51px;
+  margin: 0 auto 36px;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -98,7 +97,7 @@
   .new__img_save-button {
     width: 238px;
     height: 46px;
-    margin: 16px auto 25px;
+    margin: 0 auto 20px;
   }
 
   .new__img_close-button {

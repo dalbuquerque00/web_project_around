@@ -26,88 +26,55 @@ const closeImagePopupButton = document.querySelector("#expand__popup-close");
 // Função para abrir o popup de perfil
 function openPopup() {
   document.querySelector(".popup__box").classList.add("popup_opened");
-
   nameInput.value = profileName.textContent;
   aboutInput.value = profileBio.textContent;
 }
-
 editProfile.addEventListener("click", openPopup);
 
-// Função para fechar o popup de perfil
 function closePopup() {
   document.querySelector(".popup__box").classList.remove("popup_opened");
 }
-
 closeButton.addEventListener("click", closePopup);
 
-// Função para salvar as informações do formulário
 function saveProfile(event) {
   event.preventDefault();
-
   profileName.textContent = nameInput.value;
   profileBio.textContent = aboutInput.value;
-
   closePopup();
 }
-
 saveform.addEventListener("submit", saveProfile);
 
 // Função para abrir o popup de adicionar imagem
 function openAddImagePopup() {
   addImagePopup.classList.add("popup_opened");
 }
-
 addImageButton.addEventListener("click", openAddImagePopup);
 
-// Função para fechar o popup de adicionar imagem
 function closeAddImagePopup() {
   addImagePopup.classList.remove("popup_opened");
 }
-
 closeAddImagePopupButton.addEventListener("click", closeAddImagePopup);
 
-// Função para adicionar uma nova imagem
 function addNewImage(event) {
   event.preventDefault();
-
   const newCard = {
-    name: titleInput.value, // título
-    link: urlInput.value, // URL
+    name: titleInput.value,
+    link: urlInput.value,
   };
-
   const cardElement = createCard(newCard);
   elementsContainer.prepend(cardElement);
-
   closeAddImagePopup();
-
-  // Limpa o formulario
   titleInput.value = "";
   urlInput.value = "";
-
-  // Desativa o botão "Salvar" até preencher tudo
   saveButton.setAttribute("disabled", true);
 }
-
-// Enviar a imagem nova
 addImageForm.addEventListener("submit", addNewImage);
-
-// Verificação do formulário
-titleInput.addEventListener("input", checkFormValidity);
-urlInput.addEventListener("input", checkFormValidity);
-
-function checkFormValidity() {
-  if (titleInput.value.trim() !== "" && urlInput.value.trim() !== "") {
-    saveButton.removeAttribute("disabled");
-  } else {
-    saveButton.setAttribute("disabled", true);
-  }
-}
 
 // Função para abrir o popup de imagem expandida
 function openImagePopup(imageSrc, imageAlt) {
   expandedImage.src = imageSrc;
   expandedImage.alt = imageAlt;
-  expandedImageTitle.textContent = imageAlt; // O título da imagem será o alt
+  expandedImageTitle.textContent = imageAlt;
   imagePopup.classList.add("popup_opened");
 }
 
@@ -115,8 +82,6 @@ function openImagePopup(imageSrc, imageAlt) {
 function closeImagePopup() {
   imagePopup.classList.remove("popup_opened");
 }
-
-// Evento para fechar o popup de imagem expandida
 closeImagePopupButton.addEventListener("click", closeImagePopup);
 
 // Imagens iniciais
@@ -146,66 +111,48 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
   },
 ];
-
 const elementsContainer = document.querySelector(".elements");
 
-// Função para criar o card
 function createCard(card) {
-  // Cria o elemento do cartão
   const cardElement = document.createElement("div");
   cardElement.classList.add("element");
 
-  // Cria a imagem do cartão
   const cardImage = document.createElement("img");
   cardImage.classList.add("element__image");
   cardImage.src = card.link;
   cardImage.alt = card.name;
+  cardImage.addEventListener("click", () =>
+    openImagePopup(card.link, card.name)
+  );
 
-  // Adiciona evento de clique para expandir a imagem
-  cardImage.addEventListener("click", () => {
-    openImagePopup(card.link, card.name); // Expande a imagem ao clicar
-  });
-
-  // Cria nome e o like no cartão
   const cardBottom = document.createElement("div");
   cardBottom.classList.add("element__card-bottom");
-
   const cardName = document.createElement("p");
   cardName.classList.add("element__name");
   cardName.textContent = card.name;
-
   const cardLike = document.createElement("img");
   cardLike.classList.add("element__like");
   cardLike.src = "images/UIkit/like.svg";
   cardLike.alt = "Botão de like";
 
-  // Mudança do botão de like
-  cardLike.addEventListener("click", function () {
-    if (cardLike.src.includes("like.svg")) {
-      cardLike.src = "images/UIkit/like_black.png";
-    } else {
-      cardLike.src = "images/UIkit/like.svg";
-    }
+  cardLike.addEventListener("click", () => {
+    cardLike.src = cardLike.src.includes("like.svg")
+      ? "images/UIkit/like_black.png"
+      : "images/UIkit/like.svg";
   });
 
   cardBottom.appendChild(cardName);
   cardBottom.appendChild(cardLike);
 
-  // Lixeira
   const cardTrash = document.createElement("div");
   cardTrash.classList.add("element__trash");
-
   const cardTrashIcon = document.createElement("img");
   cardTrashIcon.classList.add("element__trash-icon");
   cardTrashIcon.src = "images/UIkit/Trash.png";
   cardTrashIcon.alt = "Ícone de lixeiro";
 
+  cardTrashIcon.addEventListener("click", () => cardElement.remove());
   cardTrash.appendChild(cardTrashIcon);
-
-  // Excluir a foto
-  cardTrashIcon.addEventListener("click", function () {
-    cardElement.remove();
-  });
 
   cardElement.appendChild(cardImage);
   cardElement.appendChild(cardBottom);
@@ -214,12 +161,51 @@ function createCard(card) {
   return cardElement;
 }
 
-// Renderizar os cards iniciais
 function renderCards() {
-  initialCards.forEach((card) => {
-    const cardElement = createCard(card);
-    elementsContainer.appendChild(cardElement);
-  });
+  initialCards.forEach((card) =>
+    elementsContainer.appendChild(createCard(card))
+  );
+}
+renderCards();
+
+// Fechar os popups com "Esc"
+function handleKeyDown(event) {
+  if (event.key === "Escape") {
+    closePopup();
+    closeAddImagePopup();
+    closeImagePopup();
+
+    saveform.reset();
+    addImageForm.reset();
+
+    document.querySelectorAll(".popup__error").forEach((error) => {
+      error.textContent = "";
+    });
+
+    // Habilitar o botão de salvar
+    saveButton.setAttribute("disabled", true);
+  }
 }
 
-renderCards();
+document.addEventListener("click", (event) => {
+  const popupBox = document.querySelector(".popup__box");
+  const newImgBox = document.querySelector(".new__img-box");
+
+  if (
+    popupBox.classList.contains("popup_opened") &&
+    !popupBox.contains(event.target) &&
+    !editProfile.contains(event.target)
+  ) {
+    closePopup();
+  }
+
+  if (
+    newImgBox.classList.contains("popup_opened") &&
+    !newImgBox.contains(event.target) &&
+    !addImageButton.contains(event.target)
+  ) {
+    closeAddImagePopup();
+  }
+});
+
+document.addEventListener("keydown", handleKeyDown);
