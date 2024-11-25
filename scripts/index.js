@@ -115,3 +115,8 @@ addImageFormValidator.enableValidation();
 
 // Renderizar os cards iniciais
 renderInitialCards();
+
+/* não estou conseguindo perceber meu erro, se eu testo os cards sem fazer os outros modulos, ele funciona normalmente 
+Já tentei mudar o HTML algumas vezes tbm para ver se some o erro, mas resolvo um e vem outro. Pode tentar sinalizar onde
+eu estou errando agora
+*/
