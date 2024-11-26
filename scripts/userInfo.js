@@ -1,20 +1,18 @@
-export default class Section {
-  constructor({ items, renderer }, containerSelector) {
-    this._items = items;
-    this._renderer = renderer;
-    this._container = document.querySelector(containerSelector);
+export default class UserInfo {
+  constructor({ name, about }) {
+    this._nameElement = document.querySelector(name);
+    this._aboutElement = document.querySelector(sobre);
   }
 
-  // Método para renderizar as imagens
-  renderItems() {
-    this._items.forEach((item) => {
-      const cardElement = this._renderer(item);
-      this._container.prepend(cardElement);
-    });
+  getUserInfo() {
+    return {
+      name: this._nameElement.textContent,
+      about: this._aboutElement.textContent,
+    };
   }
 
-  // Método para add um novo item ao card
-  addItem(element) {
-    this._container.prepend(element);
+  setUserInfo(name, about) {
+    this._nameElement.textContent = name;
+    this._aboutElement.textContent = sobre;
   }
 }

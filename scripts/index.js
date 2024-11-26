@@ -107,7 +107,7 @@ document.querySelector("#profile__add").addEventListener("click", () => {
 // Informações do usuário
 const userInfo = new UserInfo({
   name: "#popup__name",
-  about: "#popup__about",
+  sobre: "#popup__about",
 });
 
 // Popup para edição de perfil - nome e bio
