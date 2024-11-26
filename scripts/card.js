@@ -1,55 +1,67 @@
-export default class Card {
-  constructor(data, templateSelector, handleCardClick) {
-    this._name = data.name;
-    this._link = data.link;
+export class Card {
+  constructor(name, link, templateSelector, handleCardClick) {
+    this._name = name;
+    this._link = link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
 
-  // Método privado para obter o template do cartão
   _getTemplate() {
     const cardElement = document
       .querySelector(this._templateSelector)
       .content.querySelector(".element")
       .cloneNode(true);
+
     return cardElement;
   }
 
-  // Método privado para adicionar os ouvintes de eventos
+  // Método para criar o card
+  generateCard() {
+    this._element = this._getTemplate();
+    this._setEventListeners();
+
+    return this._element;
+  }
+
   _setEventListeners() {
     this._element
-      .querySelector(".element__like")
-      .addEventListener("click", () => this._handleLikeClick());
-
+      .querySelector(".element__image")
+      .addEventListener("click", () => {
+        this._handleCardClick(this._link, this._name);
+      });
     this._element
       .querySelector(".element__trash-icon")
       .addEventListener("click", () => this._handleDeleteCard());
 
-    this._cardImage.addEventListener("click", () =>
-      this._handleCardClick(this._name, this._link)
-    );
+    //função de like
+    const likeButton = this._element.querySelector(".element__like");
+    likeButton.src = likeImg;
+    this._element
+      .querySelector(".element__like")
+      .addEventListener("click", () => this._handleLikeIcon());
   }
-
-  // Método privado para alternar o estado do botão de curtida
-  _handleLikeClick() {
-    this._likeButton.classList.toggle("element__like_active");
-  }
-
-  // Método privado para excluir o cartão
+  // Método para remover o card de img
   _handleDeleteCard() {
     this._element.remove();
     this._element = null;
   }
 
-  // Método público para criar o cartão
-  generateCard() {
-    this._element = this._getTemplate();
-    this._likeButton = this._element.querySelector(".element__like");
-    this._cardImage = this._element.querySelector(".element__image");
+  // Método para lidar com o like
+  _handleLikeIcon() {
+    const likeBtn = this._element.querySelector(".element__like");
+    // Alterna entre as imagens de like e liked
+    if (likeBtn.src.includes(likeImg)) {
+      likeBtn.src = likedImg;
+    } else {
+      likeBtn.src = likeImg;
+    }
+  }
 
+  getCard() {
+    this._element = this._getTemplate();
+    this._element.querySelector(".element__image").src = this._link;
+    this._element.querySelector(".element__image").alt = this._name;
     this._element.querySelector(".element__name").textContent = this._name;
-    this._cardImage.src = this._link;
-    this._cardImage.alt = this._name;
 
     this._setEventListeners();
 

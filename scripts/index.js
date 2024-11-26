@@ -1,24 +1,12 @@
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
-import { openPopup, closePopup, closePopupOnOutsideClick } from "./utils.js";
+import Card from "./card.js";
+import { FormValidator } from "./formValidator.js";
+import Section from "./Section.js";
+import PopupWithForm from "./popupWithForm.js";
+import PopupWithImage from "./popupWithImage.js";
+import UserInfo from "./userInfo.js";
 
-// Seletores de elementos do DOM
-const profileEditButton = document.querySelector(".profile__edit-button");
-const addImageButton = document.querySelector(".profile__add");
-const profileName = document.querySelector(".profile__name");
-const profileBio = document.querySelector(".profile__bio");
-const popupEditProfile = document.querySelector(".popup__box");
-const popupAddImage = document.querySelector(".new__img-box");
-const formEditProfile = document.querySelector(".popup__form");
-const formAddImage = document.querySelector(".new__img-form");
-const nameInput = document.querySelector("#popup__input-name");
-const aboutInput = document.querySelector("#popup__input-about");
-const titleInput = document.querySelector("#new__img_input-name");
-const urlInput = document.querySelector("#new__img_input-url");
-const cardsContainer = document.querySelector(".elements");
-
-// Configurações para validação dos formulários
-const formConfig = {
+const validationConfigProfile = {
+  formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button-save",
   inactiveButtonClass: "popup__button_disabled",
@@ -26,7 +14,15 @@ const formConfig = {
   errorClass: "input__errorMessage_block",
 };
 
-// Cards iniciais
+const validationConfigNewImg = {
+  formSelector: ".new__img-form",
+  inputSelector: ".new__img_input",
+  submitButtonSelector: ".new__img_save-button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "invalid-input",
+  errorClass: "input__errorMessage_block",
+};
+
 const initialCards = [
   {
     name: "Vale de Yosemite",
@@ -54,69 +50,84 @@ const initialCards = [
   },
 ];
 
-// Função para criar e renderizar cards
-function createCard(data) {
-  const card = new Card(data, "#card-template", openPopup);
-  return card.generateCard();
-}
+//função para lidar com o clique no card
+const handleCardClick = (link, name) => {
+  imagePopup.open(link, name);
+};
 
-function renderInitialCards() {
-  initialCards.forEach((cardData) => {
-    const cardElement = createCard(cardData);
-    cardsContainer.append(cardElement);
+// Função para renderizar os cards de imagens
+const renderCard = (cardData) => {
+  const card = new Card(
+    cardData.name,
+    cardData.link,
+    "#card-template",
+    handleCardClick
+  );
+  return card.getCard();
+};
+
+// Renderiza as imagens iniciais
+const imgSection = new Section(
+  { items: initialCards, renderer: renderCard },
+  ".elements"
+);
+imgSection.renderItems();
+
+// Popup para expandir as imagem
+const imagePopup = new PopupWithImage(".element__image-popup");
+imagePopup.setEventListeners();
+
+const newImgPopup = new PopupWithForm(".new_img", (formData) => {
+  const newCard = renderCard({ name: formData.title, link: formData.url });
+  imgSection.addItem(newCard);
+  newImgPopup.close();
+});
+newImgPopup.setEventListeners();
+
+// Add evento ao btn para abrir o popup de add img
+document
+  .querySelector("#profile__edit-button")
+  .addEventListener("click", () => {
+    newImgPopup.open();
+    newImgFormValidator.resetValidation();
   });
-}
 
-// Manipuladores de eventos
-function handleProfileEditSubmit(evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileBio.textContent = aboutInput.value;
-  closePopup(popupEditProfile);
-}
+// Validação do formulário para adicionar imagens
+const newImgFormValidator = new FormValidator(
+  validationConfigNewImg,
+  newImgPopup.getFormElement()
+);
+newImgFormValidator.enableValidation();
 
-function handleAddImageSubmit(evt) {
-  evt.preventDefault();
-  const newCard = {
-    name: titleInput.value,
-    link: urlInput.value,
-  };
-  const cardElement = createCard(newCard);
-  cardsContainer.prepend(cardElement);
-  closePopup(popupAddImage);
-  formAddImage.reset();
-}
-
-// Eventos para abrir e fechar popups
-profileEditButton.addEventListener("click", () => {
-  nameInput.value = profileName.textContent;
-  aboutInput.value = profileBio.textContent;
-  openPopup(popupEditProfile);
+document.querySelector("#profile__add").addEventListener("click", () => {
+  newImgFormValidator.resetValidation();
+  newImgPopup.open();
 });
 
-addImageButton.addEventListener("click", () => {
-  formAddImage.reset();
-  openPopup(popupAddImage);
+// Informações do usuário
+const userInfo = new UserInfo({
+  name: "#popup__name",
+  about: "#popup__about",
 });
 
-formEditProfile.addEventListener("submit", handleProfileEditSubmit);
-formAddImage.addEventListener("submit", handleAddImageSubmit);
+// Popup para edição de perfil - nome e bio
+const editProfilePopup = new PopupWithForm("#editPopup", (formData) => {
+  userInfo.setUserInfo(formData.name, formData.about);
+  editProfilePopup.close();
+});
+editProfilePopup.setEventListeners();
 
-// Fechar popups ao clicar fora da área ou com Esc
-closePopupOnOutsideClick(popupEditProfile);
-closePopupOnOutsideClick(popupAddImage);
+// Abertura do popup para editar perfil - nome e bio
+document.querySelector("#popup__container").addEventListener("click", () => {
+  const currentUserInfo = userInfo.getUserInfo();
+  editProfilePopup.setInputValues(currentUserInfo);
+  editProfileFormValidator.resetValidation();
+  editProfilePopup.open();
+});
 
-// Inicialização da validação dos formulários
-const editProfileFormValidator = new FormValidator(formConfig, formEditProfile);
+// Validação do formulário de edição de perfil
+const editProfileFormValidator = new FormValidator(
+  validationConfigProfile,
+  editProfilePopup.getFormElement()
+);
 editProfileFormValidator.enableValidation();
-
-const addImageFormValidator = new FormValidator(formConfig, formAddImage);
-addImageFormValidator.enableValidation();
-
-// Renderizar os cards iniciais
-renderInitialCards();
-
-/* não estou conseguindo perceber meu erro, se eu testo os cards sem fazer os outros modulos, ele funciona normalmente 
-Já tentei mudar o HTML algumas vezes tbm para ver se some o erro, mas resolvo um e vem outro. Pode tentar sinalizar onde
-eu estou errando agora
-*/
