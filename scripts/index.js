@@ -1,10 +1,22 @@
+import { openPopup, closePopup } from "./utils.js";
+import { enableValidation } from "./formValidator.js";
 import { Card } from "./card.js";
-import { openPopup, closePopup, selectors } from "./utils.js";
-import { enableValidation, resetForm } from "./formValidator.js";
 
-const { popupEdit, popupImage, formEditProfile, formAddCard } = selectors;
+// Seletores dos elementos no DOM
+const editProfileButton = document.querySelector(".profile__edit-button");
+const addImageButton = document.querySelector(".profile__add");
+const popupEdit = document.querySelector(".popup-edit");
+const popupNewImage = document.querySelector(".popup-new-image");
+const popupImage = document.querySelector(".element__image-popup");
+const formEditProfile = popupEdit.querySelector(".popup__form");
+const formAddCard = popupNewImage.querySelector(".popup__form");
+const profileName = document.querySelector(".profile__name");
+const profileBio = document.querySelector(".profile__bio");
+const nameInput = document.querySelector("#popup__input-name");
+const bioInput = document.querySelector("#popup__input-about");
+const cardContainer = document.querySelector(".elements");
 
-// Renderizar os cards iniciais
+// Configuração inicial dos cards
 const initialCards = [
   {
     name: "Vale de Yosemite",
@@ -32,90 +44,68 @@ const initialCards = [
   },
 ];
 
+// Renderiza os cards iniciais
 initialCards.forEach((data) => {
-  const card = new Card(
-    data.name,
-    data.link,
-    ".card-template",
-    handleCardClick
-  );
-  document.querySelector(".elements").appendChild(card.generateCard());
+  const card = new Card(data.name, data.link, ".card-template", openImagePopup);
+  cardContainer.appendChild(card.generateCard());
 });
 
-// Perfil
-const profileName = document.querySelector(".profile__name");
-const profileBio = document.querySelector(".profile__bio");
-const nameInput = document.querySelector("#popup__input-name");
-const aboutInput = document.querySelector("#popup__input-about");
-
-// Botões
-const editProfileButton = document.querySelector(".profile__edit-button");
-const addCardButton = document.querySelector(".profile__add");
-
-// Abrir o popup de edição
-editProfileButton.addEventListener("click", () => {
-  nameInput.value = profileName.textContent;
-  aboutInput.value = profileBio.textContent;
-  openPopup(popupEdit);
-});
-
-// Função para abrir o popup de visualização
-function handleCardClick(link, name) {
-  const popupImageElement = document.querySelector(".element__image-main");
-  const popupNameElement = document.querySelector(".element__image-name");
+// Função para abrir o popup de visualização de imagem
+function openImagePopup(link, name) {
+  const popupImageElement = popupImage.querySelector(".element__image-main");
+  const popupImageTitle = popupImage.querySelector(".element__image-name");
 
   popupImageElement.src = link;
   popupImageElement.alt = name;
-  popupNameElement.textContent = name;
+  popupImageTitle.textContent = name;
 
   openPopup(popupImage);
 }
 
-// Adicionar novos cards
-function handleAddCardFormSubmit(event) {
-  event.preventDefault();
-  const titleInput = document.querySelector("#new__img_input-name").value;
-  const urlInput = document.querySelector("#new__img_input-url").value;
-
-  const card = new Card(
-    titleInput,
-    urlInput,
-    ".card-template",
-    handleCardClick
-  );
-  document.querySelector(".elements").prepend(card.generateCard());
-
-  closePopup(formAddCard);
-  resetForm(formAddCard, {
-    inputSelector: ".popup__input",
-    submitButtonSelector: ".popup__button-save",
-    inactiveButtonClass: "popup__button_disabled",
-    inputErrorClass: "invalid-input",
-    errorClass: "input__errorMessage_block",
-  });
-}
-formAddCard.addEventListener("submit", handleAddCardFormSubmit);
-
-// Abrir o popup de adicionar card
-addCardButton.addEventListener("click", () => {
-  openPopup(formAddCard);
+// Abertura dos popups
+editProfileButton.addEventListener("click", () => {
+  nameInput.value = profileName.textContent;
+  bioInput.value = profileBio.textContent;
+  openPopup(popupEdit);
 });
 
-// Validação
+addImageButton.addEventListener("click", () => {
+  formAddCard.reset();
+  openPopup(popupNewImage);
+});
+
+// Fechamento dos popups
+const closeButtons = document.querySelectorAll(".popup__close-button");
+closeButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    const popup = event.target.closest(".popup");
+    closePopup(popup);
+  });
+});
+
+// Salvando as edições do perfil
+formEditProfile.addEventListener("submit", (event) => {
+  event.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileBio.textContent = bioInput.value;
+  closePopup(popupEdit);
+});
+
+// Adicionando novos cards
+formAddCard.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const title = formAddCard.querySelector("#new__img_input-name").value;
+  const link = formAddCard.querySelector("#new__img_input-url").value;
+  const newCard = new Card(title, link, ".card-template", openImagePopup);
+  cardContainer.prepend(newCard.generateCard());
+  closePopup(popupNewImage);
+});
+
+// Validação dos formulários
 enableValidation({
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button-save",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "invalid-input",
-  errorClass: "input__errorMessage_block",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
 });
-
-// Função para salvar o perfil
-function handleProfileFormSubmit(event) {
-  event.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileBio.textContent = aboutInput.value;
-  closePopup(popupEdit);
-}
-formEditProfile.addEventListener("submit", handleProfileFormSubmit);

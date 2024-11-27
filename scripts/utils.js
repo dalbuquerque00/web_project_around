@@ -1,23 +1,19 @@
+// Abre o popup
 export function openPopup(popup) {
   popup.classList.add("popup_opened");
-
-  function handleEscClose(event) {
-    if (event.key === "Escape") {
-      closePopup(popup);
-      document.removeEventListener("keydown", handleEscClose);
-    }
-  }
-
-  document.addEventListener("keydown", handleEscClose);
+  document.addEventListener("keydown", closeByEsc);
 }
 
+// Fecha o popup
 export function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closeByEsc);
 }
 
-export const selectors = {
-  popupEdit: document.querySelector("#popup-edit"),
-  popupImage: document.querySelector(".element__image-popup"),
-  formEditProfile: document.querySelector("#form-edit-profile"),
-  formAddCard: document.querySelector("#form-add-card"),
-};
+// Fecha o popup com a tecla ESC
+function closeByEsc(event) {
+  if (event.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    if (openedPopup) closePopup(openedPopup);
+  }
+}
