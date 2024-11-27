@@ -26,47 +26,32 @@
           <img
             class="profile__avatar"
             src="images/image.jpg"
-            alt="Imagem de perfil de Jacques Cousteau"
+            alt="imagem de perfil"
           />
           <div class="profile__content">
             <div class="profile__info">
               <h2 class="profile__name">Jacques Cousteau</h2>
-              <button
-                type="button"
-                class="profile__edit-button"
-                aria-label="Editar perfil"
-              >
-                <img
-                  src="images/UIkit/Edit Button.png"
-                  alt="Ícone de edição do perfil"
-                />
+              <button type="button" class="profile__edit-button">
+                <img src="images/UIkit/Edit Button.png" alt="botão de edição" />
               </button>
             </div>
             <p class="profile__bio">Explorador</p>
           </div>
-          <button
-            type="button"
-            class="profile__add"
-            aria-label="Adicionar nova imagem"
-          >
+          <button type="button" class="profile__add">
             <img
               src="images/UIkit/Add_Button.svg"
-              alt="Ícone para adicionar imagens"
+              alt="botão para adicionar imagens"
             />
           </button>
-        </section>
 
-        <!-- Popups -->
-        <div class="popups-container">
-          <!-- Popup de edição da bio -->
-          <section class="popup popup-edit">
+          <!-- Zona para o popup de edição da bio -->
+          <section class="popup">
             <div class="popup__box">
-              <button
-                type="button"
-                class="popup__close-button popup-edit__close-button"
-                aria-label="Fechar edição de perfil"
-              >
-                <img src="images/UIkit/Close Icon.png" alt="Ícone de fechar" />
+              <button type="button" class="popup__close-button">
+                <img
+                  src="images/UIkit/Close Icon.png"
+                  alt="Botão para sair do popup"
+                />
               </button>
               <div class="popup__content">
                 <h2 class="popup__title">Editar Perfil</h2>
@@ -81,7 +66,7 @@
                     minlength="2"
                     maxlength="40"
                     required
-                    placeholder="Digite seu nome"
+                    placeholder="Nome"
                     class="popup__input"
                   />
                   <span
@@ -99,7 +84,7 @@
                     minlength="2"
                     maxlength="200"
                     required
-                    placeholder="Digite algo sobre você"
+                    placeholder="Sobre mim"
                     class="popup__input"
                   />
                   <span
@@ -115,28 +100,27 @@
             </div>
           </section>
 
-          <!-- Popup para adição de imagens -->
-          <section class="popup popup-new-image">
-            <div class="popup__box">
+          <!-- Fim da zona de popup de edição da bio e início do popup para adição de imagens -->
+          <section class="new_img">
+            <div class="new__img-box">
               <button
                 type="button"
-                class="popup__close-button popup-new-image__close-button"
-                aria-label="Fechar adição de imagem"
+                class="new__img_close-button popup__close-button"
               >
-                <img src="images/UIkit/Close Icon.png" alt="Ícone de fechar" />
+                <img src="images/UIkit/Close Icon.png" alt="botão de fechar" />
               </button>
-              <div class="popup__content">
-                <h3 class="popup__title">Novo Local</h3>
-                <form class="popup__form popup-new-image__form" novalidate>
-                  <label for="new__img_input-name" class="popup__label"
+              <div class="new__img-content">
+                <h3 class="new__img-title">Novo local</h3>
+                <form class="new__img-form" novalidate>
+                  <label for="new__img_input-name" class="new__img-label"
                     >Título</label
                   >
                   <input
                     type="text"
                     name="titulo"
                     id="new__img_input-name"
-                    class="popup__input"
-                    placeholder="Digite o título"
+                    class="new__img_input popup__input"
+                    placeholder="Novo local"
                     required
                   />
                   <span
@@ -144,15 +128,15 @@
                     id="new__img_input-name-error"
                   ></span>
 
-                  <label for="new__img_input-url" class="popup__label"
-                    >URL</label
+                  <label for="new__img_input-url" class="new__img-label"
+                    >Url</label
                   >
                   <input
                     type="url"
                     name="url"
                     id="new__img_input-url"
-                    class="popup__input"
-                    placeholder="Digite o URL da imagem"
+                    class="new__img_input popup__input"
+                    placeholder="Url da imagem"
                     required
                   />
                   <span
@@ -160,55 +144,59 @@
                     id="new__img_input-url-error"
                   ></span>
 
-                  <button type="submit" class="popup__button-save" disabled>
+                  <button
+                    type="submit"
+                    class="new__img_save-button popup__button-save"
+                    disabled
+                  >
                     Salvar
                   </button>
                 </form>
               </div>
             </div>
           </section>
-        </div>
+        </section>
 
-        <!-- Grid de imagens -->
+        <!-- Grid adição de imagens -->
         <section class="elements">
           <template class="card-template">
             <div class="element">
               <img
                 class="element__image"
                 src="scripts/index.js"
-                alt="Imagem de exemplo"
+                alt="imagem do cartão"
               />
               <div class="element__card-bottom">
-                <p class="element__name">Título de exemplo</p>
+                <p class="element__name"></p>
                 <img
                   class="element__like"
                   src="images/UIkit/like.svg"
-                  alt="Botão de curtida"
+                  alt="Botão de like"
                 />
               </div>
-              <!-- Botão de excluir -->
+              <!-- Excluir fotos -->
               <div class="element__trash">
                 <img
                   class="element__trash-icon"
                   src="images/UIkit/Trash.png"
-                  alt="Ícone de lixeira"
+                  alt="Ícone de lixeiro"
                 />
               </div>
             </div>
           </template>
 
-          <!-- Popup de visualização de imagem -->
-          <div class="popup element__image-popup">
-            <div class="popup__box">
+          <!-- Expandir as imagens -->
+          <div class="element__image-popup popup">
+            <div class="element__box">
               <button
-                class="popup__close-button element__popup-close-button"
+                class="element__button-close"
                 type="button"
-                aria-label="Fechar visualização de imagem"
+                id="expand__popup-close"
               >
-                <img src="images/UIkit/Close Icon.png" alt="Ícone de fechar" />
+                <img src="images/UIkit/Close Icon.png" alt="Botão de fechar" />
               </button>
-              <img class="element__image-main" src="" alt="" />
-              <h4 class="element__image-name">Título da imagem</h4>
+              <img class="element__image-main" src="*" alt="Imagem" />
+              <h4 class="element__image-name"></h4>
             </div>
           </div>
         </section>

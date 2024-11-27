@@ -1,5 +1,4 @@
-.popup__box {
-  display: flex;
+.popup {
   display: none;
   position: fixed;
   top: 0;
@@ -76,7 +75,7 @@
   width: 40px;
   height: 40px;
   top: -1px;
-  left: 236px;
+  left: 420px;
   cursor: pointer;
   position: relative;
 }

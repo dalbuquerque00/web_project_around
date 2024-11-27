@@ -1,52 +1,50 @@
-export class Card {
-  constructor(name, link, templateSelector, handleCardClick) {
-    this._name = name;
-    this._link = link;
+export default class Card {
+  constructor(data, templateSelector, handleCardClick) {
+    this._name = data.name;
+    this._link = data.link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
-    const cardElement = document
+    const cardTemplate = document
       .querySelector(this._templateSelector)
       .content.querySelector(".element")
       .cloneNode(true);
-
-    return cardElement;
+    return cardTemplate;
   }
 
-  generateCard() {
+  _setEventListeners() {
+    this._cardImage.addEventListener("click", () =>
+      this._handleCardClick(this._link, this._name)
+    );
+    this._likeButton.addEventListener("click", () => this._toggleLike());
+    this._deleteButton.addEventListener("click", () => this._deleteCard());
+  }
+
+  _toggleLike() {
+    this._likeButton.classList.toggle("element__like_active");
+  }
+
+  _deleteCard() {
+    this._element.remove();
+    this._element = null;
+  }
+
+  getCardElement() {
     this._element = this._getTemplate();
-    this._imageElement = this._element.querySelector(".element__image");
+    this._cardImage = this._element.querySelector(".element__image");
     this._likeButton = this._element.querySelector(".element__like");
     this._deleteButton = this._element.querySelector(".element__trash-icon");
-    this._titleElement = this._element.querySelector(".element__name");
 
-    // Preenchendo o card
-    this._imageElement.src = this._link;
-    this._imageElement.alt = this._name;
-    this._titleElement.textContent = this._name;
+    this._element.querySelector(".element__name").textContent = this._name;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
 
-    // Adicionando eventos
     this._setEventListeners();
 
     return this._element;
   }
-
-  _setEventListeners() {
-    // Expansão de imagem
-    this._imageElement.addEventListener("click", () => {
-      this._handleCardClick(this._link, this._name);
-    });
-
-    // Botão de curtida
-    this._likeButton.addEventListener("click", () => {
-      this._likeButton.classList.toggle("element__like_active");
-    });
-
-    // Exclusão de card
-    this._deleteButton.addEventListener("click", () => {
-      this._element.remove();
-    });
-  }
 }
+
+// Segui as dicas do instrutor, os erros vinham por conta de uma falha no css. Mas depois de ajeitar e revisar a materia eu consegui fazer

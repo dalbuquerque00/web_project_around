@@ -1,5 +1,4 @@
 .new__img-box {
-  display: flex;
   position: fixed;
   display: none;
   top: 0;
@@ -71,7 +70,7 @@
   width: 40px;
   height: 40px;
   top: -1px;
-  left: 236px;
+  left: 222px;
   cursor: pointer;
   position: relative;
 }
