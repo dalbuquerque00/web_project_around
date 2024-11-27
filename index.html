@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Pagina social para exoloradores adicionarem suas fotos"
+      content="Página social para exploradores adicionarem suas fotos"
     />
     <meta name="author" content="Danilo Morais" />
     <link rel="stylesheet" href="pages/index.css" />
@@ -16,45 +16,61 @@
       <header class="header">
         <img
           src="images/logo.png"
-          alt="Logotipo Around the u.s"
+          alt="Logotipo Around the U.S"
           class="header__logo"
         />
-        <img src="images/UIkit/Line.png" alt="Divisoria" class="header__rule" />
+        <img src="images/UIkit/Line.png" alt="Divisória" class="header__rule" />
       </header>
       <main class="content">
         <section class="profile">
           <img
             class="profile__avatar"
             src="images/image.jpg"
-            alt="imagem de perfil"
+            alt="Imagem de perfil de Jacques Cousteau"
           />
           <div class="profile__content">
             <div class="profile__info">
               <h2 class="profile__name">Jacques Cousteau</h2>
-              <button type="button" class="profile__edit-button">
-                <img src="images/UIkit/Edit Button.png" alt="botão de edição" />
+              <button
+                type="button"
+                class="profile__edit-button"
+                aria-label="Editar perfil"
+              >
+                <img
+                  src="images/UIkit/Edit Button.png"
+                  alt="Ícone de edição do perfil"
+                />
               </button>
             </div>
             <p class="profile__bio">Explorador</p>
           </div>
-          <button type="button" class="profile__add">
+          <button
+            type="button"
+            class="profile__add"
+            aria-label="Adicionar nova imagem"
+          >
             <img
               src="images/UIkit/Add_Button.svg"
-              alt="botão para adicionar imagens"
+              alt="Ícone para adicionar imagens"
             />
           </button>
-          <!-- Zona para o popup  -->
-          <section class="popup">
+        </section>
+
+        <!-- Popups -->
+        <div class="popups-container">
+          <!-- Popup de edição da bio -->
+          <section class="popup popup-edit">
             <div class="popup__box">
-              <button type="button" class="popup__close-button">
-                <img
-                  src="images/UIkit/Close Icon.png"
-                  alt="Botão para sair do popup"
-                />
+              <button
+                type="button"
+                class="popup__close-button popup-edit__close-button"
+                aria-label="Fechar edição de perfil"
+              >
+                <img src="images/UIkit/Close Icon.png" alt="Ícone de fechar" />
               </button>
               <div class="popup__content">
                 <h2 class="popup__title">Editar Perfil</h2>
-                <form class="popup__form">
+                <form class="popup__form" id="popup__form" novalidate>
                   <label for="popup__input-name" class="popup__label"
                     >Nome</label
                   >
@@ -65,126 +81,144 @@
                     minlength="2"
                     maxlength="40"
                     required
-                    placeholder="Nome"
+                    placeholder="Digite seu nome"
                     class="popup__input"
                   />
+                  <span
+                    class="popup__error"
+                    id="popup__input-name-error"
+                  ></span>
+
                   <label for="popup__input-about" class="popup__label"
                     >Sobre mim</label
                   >
                   <input
                     type="text"
                     id="popup__input-about"
-                    name="Sobre mim"
+                    name="sobre"
                     minlength="2"
-                    maxlength="240"
+                    maxlength="200"
                     required
-                    placeholder="Sobre mim"
+                    placeholder="Digite algo sobre você"
                     class="popup__input"
                   />
-                  <button type="submit" class="popup__button-save">
+                  <span
+                    class="popup__error"
+                    id="popup__input-about-error"
+                  ></span>
+
+                  <button type="submit" class="popup__button-save" disabled>
                     Salvar
                   </button>
                 </form>
               </div>
             </div>
           </section>
-          <!-- fim da zona de popup  -->
-        </section>
+
+          <!-- Popup para adição de imagens -->
+          <section class="popup popup-new-image">
+            <div class="popup__box">
+              <button
+                type="button"
+                class="popup__close-button popup-new-image__close-button"
+                aria-label="Fechar adição de imagem"
+              >
+                <img src="images/UIkit/Close Icon.png" alt="Ícone de fechar" />
+              </button>
+              <div class="popup__content">
+                <h3 class="popup__title">Novo Local</h3>
+                <form class="popup__form popup-new-image__form" novalidate>
+                  <label for="new__img_input-name" class="popup__label"
+                    >Título</label
+                  >
+                  <input
+                    type="text"
+                    name="titulo"
+                    id="new__img_input-name"
+                    class="popup__input"
+                    placeholder="Digite o título"
+                    required
+                  />
+                  <span
+                    class="popup__error"
+                    id="new__img_input-name-error"
+                  ></span>
+
+                  <label for="new__img_input-url" class="popup__label"
+                    >URL</label
+                  >
+                  <input
+                    type="url"
+                    name="url"
+                    id="new__img_input-url"
+                    class="popup__input"
+                    placeholder="Digite o URL da imagem"
+                    required
+                  />
+                  <span
+                    class="popup__error"
+                    id="new__img_input-url-error"
+                  ></span>
+
+                  <button type="submit" class="popup__button-save" disabled>
+                    Salvar
+                  </button>
+                </form>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Grid de imagens -->
         <section class="elements">
-          <div class="element">
-            <img
-              class="element__image"
-              src="images/kirill-pershin-1088404-unsplash.jpg"
-              alt="image cards"
-            />
-            <div class="element__card-bottom">
-              <p class="element__name">Vale de Yosemite</p>
+          <template class="card-template">
+            <div class="element">
               <img
-                class="element__like"
-                src="images/UIkit/like.svg"
-                alt="Like button"
+                class="element__image"
+                src="scripts/index.js"
+                alt="Imagem de exemplo"
               />
+              <div class="element__card-bottom">
+                <p class="element__name">Título de exemplo</p>
+                <img
+                  class="element__like"
+                  src="images/UIkit/like.svg"
+                  alt="Botão de curtida"
+                />
+              </div>
+              <!-- Botão de excluir -->
+              <div class="element__trash">
+                <img
+                  class="element__trash-icon"
+                  src="images/UIkit/Trash.png"
+                  alt="Ícone de lixeira"
+                />
+              </div>
             </div>
-          </div>
-          <div class="element">
-            <img
-              class="element__image"
-              src="images/kirill-pershin-1404681-unsplash.png"
-              alt="image cards"
-            />
-            <div class="element__card-bottom">
-              <p class="element__name">Lago Louise</p>
+          </template>
+
+          <!-- Popup de visualização de imagem -->
+          <div class="popup element__image-popup">
+            <div class="popup__box">
+              <button
+                class="popup__close-button element__popup-close-button"
+                type="button"
+                aria-label="Fechar visualização de imagem"
+              >
+                <img src="images/UIkit/Close Icon.png" alt="Ícone de fechar" />
+              </button>
               <img
-                class="element__like"
-                src="images/UIkit/like.svg"
-                alt="Like button"
+                class="element__image-main"
+                src="scripts/index.js"
+                alt="Imagem ampliada"
               />
-            </div>
-          </div>
-          <div class="element">
-            <img
-              class="element__image"
-              src="images/kirill-pershin-1556355-unsplash.png"
-              alt="image cards"
-            />
-            <div class="element__card-bottom">
-              <p class="element__name">Montanhas</p>
-              <img
-                class="element__like"
-                src="images/UIkit/like.svg"
-                alt="Like button"
-              />
-            </div>
-          </div>
-          <div class="element">
-            <img
-              class="element__image"
-              src="images/kirill-pershin-1404681-unsplash (1).png"
-              alt="image cards"
-            />
-            <div class="element__card-bottom">
-              <p class="element__name">Latemar</p>
-              <img
-                class="element__like"
-                src="images/UIkit/like.svg"
-                alt="Like button"
-              />
-            </div>
-          </div>
-          <div class="element">
-            <img
-              class="element__image"
-              src="images/kirill-pershin-1556355-unsplash (1).png"
-              alt="image cards"
-            />
-            <div class="element__card-bottom">
-              <p class="element__name">Parque Nacional da Vanoise</p>
-              <img
-                class="element__like"
-                src="images/UIkit/like.svg"
-                alt="Like button"
-              />
-            </div>
-          </div>
-          <div class="element">
-            <img
-              class="element__image"
-              src="images/kirill-pershin-1088404-unsplash.png"
-              alt="image cards"
-            />
-            <div class="element__card-bottom">
-              <p class="element__name">Lago di Braies</p>
-              <img
-                class="element__like"
-                src="images/UIkit/like.svg"
-                alt="Like button"
-              />
+              <h4 class="element__image-name">Título da imagem</h4>
             </div>
           </div>
         </section>
       </main>
-      <footer class="footer">&#169 2024 Around the U.S</footer>
+      <footer class="footer">&#169; 2024 Around the U.S</footer>
     </div>
-    <script src="scripts/index.js"></script>
+    <script type="module" src="scripts/index.js"></script>
   </body>
 </html>
