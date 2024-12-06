@@ -16,7 +16,7 @@ export default class Card {
 
   _setEventListeners() {
     this._cardImage.addEventListener("click", () =>
-      this._handleCardClick(this._link, this._name)
+      this._handleCardClick({ link: this._link, name: this._name })
     );
     this._likeButton.addEventListener("click", () => this._toggleLike());
     this._deleteButton.addEventListener("click", () => this._deleteCard());
@@ -46,5 +46,3 @@ export default class Card {
     return this._element;
   }
 }
-
-// Segui as dicas do instrutor, os erros vinham por conta de uma falha no css. Mas depois de ajeitar e revisar a materia eu consegui fazer
