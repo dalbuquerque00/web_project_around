@@ -4,6 +4,8 @@ export default class Card {
     this._link = data.link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+
+    this._isLiked = JSON.parse(localStorage.getItem(this._name)) || false;
   }
 
   _getTemplate() {
@@ -22,10 +24,13 @@ export default class Card {
     this._deleteButton.addEventListener("click", () => this._deleteCard());
   }
 
+  // Alterna o estado do like
   _toggleLike() {
-    this._likeButton.classList.toggle("element__like_active");
+    this._isLiked = !this._isLiked; // para alterar  estado de like
+    this._likeButton.classList.toggle("element__like_active", this._isLiked);
   }
 
+  // Deleta o cartão
   _deleteCard() {
     this._element.remove();
     this._element = null;
@@ -37,11 +42,17 @@ export default class Card {
     this._likeButton = this._element.querySelector(".element__like");
     this._deleteButton = this._element.querySelector(".element__trash-icon");
 
+    // Pdados do cartão
     this._element.querySelector(".element__name").textContent = this._name;
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
 
-    this._setEventListeners();
+    // Estado do likee
+    if (this._isLiked) {
+      this._likeButton.classList.add("element__like_active");
+    }
+
+    this._setEventListeners(); // Configura os listeners
 
     return this._element;
   }

@@ -1,3 +1,4 @@
+// index.js
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
@@ -24,7 +25,7 @@ const userInfo = new UserInfo({
 const profilePopup = new PopupWithForm(".popup", (formData) => {
   userInfo.setUserInfo({ name: formData.nome, bio: formData.sobre });
 });
-profilePopup.setEventListeners();
+profilePopup.setEventListeners(); // Certifique-se de chamar setEventListeners
 
 // Evento para abrir o popup de edição de perfil
 document
@@ -38,14 +39,14 @@ document
 
 // Popup para visualização de imagens
 const imagePopup = new PopupWithImage(".element__image-popup");
-imagePopup.setEventListeners();
+imagePopup.setEventListeners(); // Certifique-se de chamar setEventListeners
 
 // Popup para adição de cartões
 const addCardPopup = new PopupWithForm(".new__img-box", (formData) => {
   const newCard = createCard({ name: formData.titulo, link: formData.url });
   cardSection.addItem(newCard);
 });
-addCardPopup.setEventListeners();
+addCardPopup.setEventListeners(); // Certifique-se de chamar setEventListeners
 
 // Evento para abrir o popup de adição de cartões
 document.querySelector(".profile__add").addEventListener("click", () => {
@@ -111,30 +112,3 @@ const addCardValidator = new FormValidator(
   document.querySelector(".new__img-form")
 );
 addCardValidator.enableValidation();
-
-/* const initialCards = [
-  {
-    name: "Vale de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-  },
-  {
-    name: "Montanhas Carecas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
-  },
-  {
-    name: "Parque Nacional da Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
-  },
-];*/

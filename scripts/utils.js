@@ -9,7 +9,8 @@ export function closePopup(popup) {
   document.removeEventListener("keydown", closeOnEscape);
 }
 
-// Função para resetar o formulário e apagar os avisos
+// Resetar formulario
+
 export function resetForm(popup) {
   const form = popup.querySelector("form");
   if (form) {
@@ -19,10 +20,11 @@ export function resetForm(popup) {
 
     // Remove erros e classes de validação
     errorElements.forEach((errorElement) => {
-      errorElement.textContent = "";
+      errorElement.textContent = ""; // Limpa a mensagem de erro
     });
+
     inputs.forEach((input) => {
-      input.classList.remove("invalid-input");
+      input.classList.remove("invalid-input"); // Remove a classe de erro
     });
 
     // Desativa o botão de envio
@@ -33,7 +35,6 @@ export function resetForm(popup) {
     }
   }
 }
-
 function closeOnEscape(event) {
   if (event.key === "Escape") {
     const openedPopup = document.querySelector(".popup_opened");

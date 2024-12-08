@@ -1,3 +1,6 @@
+// Popup.js
+import { resetForm } from "./utils.js";
+
 export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
@@ -10,6 +13,7 @@ export default class Popup {
   }
 
   close() {
+    resetForm(this._popup); // resetar formulario
     this._popup.classList.remove("popup_opened");
     document.removeEventListener("keydown", this._handleEscClose);
   }
@@ -21,10 +25,20 @@ export default class Popup {
   }
 
   setEventListeners() {
+    // Adiciona o evento de clique no botão de fechar
+    const closeButton = this._popup.querySelector(".popup__close-button");
+
+    if (closeButton) {
+      closeButton.addEventListener("click", () => {
+        this.close();
+      });
+    }
+
+    // Evento de clique fora do conteúdo também
     this._popup.addEventListener("click", (event) => {
       if (
         event.target.classList.contains("popup_opened") ||
-        event.target.classList.contains("popup__close-button")
+        event.target === closeButton
       ) {
         this.close();
       }
