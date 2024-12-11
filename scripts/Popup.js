@@ -1,7 +1,7 @@
 // Popup.js
-import { resetForm } from "./utils.js";
+import { resetForm } from "./Utils.js";
 
-export default class Popup {
+export default class PopUp {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);

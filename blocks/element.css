@@ -54,6 +54,9 @@
 
 .element__like:active {
   background-image: url("../images/UIkit/like_black.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 /* apagar imagens */
@@ -93,24 +96,31 @@
 }
 
 .element__box {
-  position: relative;
+  position: relative; /* Permite que elementos filhos sejam posicionados de forma absoluta */
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 .element__image-main {
   max-width: 75vw;
   height: 75vh;
+  display: block;
+  margin: 0 auto;
 }
 
 .element__button-close {
   position: absolute;
-  top: -38px;
-  right: -45px;
-  background: none;
-  border: none;
+  top: 10px; /* Ajuste para ficar no topo */
+  right: 10px; /* Ajuste para ficar à direita */
+  width: 40px;
+  height: 40px;
   cursor: pointer;
+  background: transparent;
+  border: none;
+  z-index: 2; /* Garante que o botão fique acima da imagem */
 }
 
 .element__image-name {
