@@ -48,10 +48,6 @@
   cursor: pointer;
 }
 
-.element__like:hover {
-  background-image: url("../images/UIkit/like_hover.png");
-}
-
 .element__like:active {
   background-image: url("../images/UIkit/like_black.png");
   background-repeat: no-repeat;

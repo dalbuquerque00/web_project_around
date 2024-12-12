@@ -22,22 +22,18 @@ export default class Card {
     );
     this._likeButton.addEventListener("click", () => this._toggleLike());
     this._deleteButton.addEventListener("click", () => this._deleteCard());
-    this._likeButton.addEventListener("click", () => {
-      console.log("Like clicado!"); // Teste de debug
-      this._toggleLike();
-    });
   }
 
   // Alterna o estado do like
   _toggleLike() {
-    this._isLiked = !this._isLiked; // Alterna o estado
+    this._isLiked = !this._isLiked;
 
     if (this._isLiked) {
-      this._likeButton.classList.add("element__like_active");
-      console.log("Classe adicionada: element__like_active");
+      this._likeButton.style.backgroundImage =
+        "url('../images/UIkit/like_black.png')"; // ativo
     } else {
-      this._likeButton.classList.remove("element__like_active");
-      console.log("Classe removida: element__like_active");
+      this._likeButton.style.backgroundImage =
+        "url('../images/UIkit/like.svg')";
     }
 
     // Persistir o estado no localStorage
@@ -60,16 +56,13 @@ export default class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
 
-    // Estado do likee
-    // Carregar estado inicial do like do localStorage
     this._isLiked = JSON.parse(localStorage.getItem(this._name)) || false;
     if (this._isLiked) {
-      this._likeButton.classList.add("element__like_active");
+      this._likeButton.style.backgroundImage =
+        "url('../images/UIkit/like_black.png')";
+    } else {
+      this._likeButton.style.backgroundImage = "url('./images/UIkit/like.svg')";
     }
-
-    this._element.querySelector(".element__name").textContent = this._name;
-    this._cardImage.src = this._link;
-    this._cardImage.alt = this._name;
 
     this._setEventListeners();
     return this._element;

@@ -14,13 +14,13 @@ export function closePopup(popup) {
 export function resetForm(popup) {
   const form = popup.querySelector("form");
   if (form) {
-    form.reset(); // Reseta os campos do formulário
+    form.reset();
     const errorElements = form.querySelectorAll(".popup__error");
     const inputs = form.querySelectorAll(".popup__input");
 
     // Remove erros e classes de validação
     errorElements.forEach((errorElement) => {
-      errorElement.textContent = ""; // Limpa a mensagem de erro
+      errorElement.textContent = "";
     });
 
     inputs.forEach((input) => {
