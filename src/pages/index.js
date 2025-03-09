@@ -14,7 +14,6 @@ import {
   cardSelectors,
   forms,
   editProfileElements,
-  addCardElements,
 } from "../utils/constants.js";
 
 // Conexão
