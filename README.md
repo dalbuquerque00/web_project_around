@@ -10,6 +10,6 @@ https://dalbuquerque00.github.io/web_project_around/
 
 - Adiçao da pasta source para organização mais eficaz do projeto
 - Remoção de classes do código que estavam atrapalhando algumas funções.
-- new_img foi retirada e uma correção para ficar as funções em uma classe de popup
+- new_img foi retirada e uma correção foi para ficar os popups ficarem em um único arquivo
 - Foi criada uma pasta utils para abrigar as configurações de validação e suas constantes
-- Orgnanização do códogo CSS(Substituição dos pixels por vw, vh...)
+- Orgnanização do código CSS(Substituição dos pixels por vw, vh...
