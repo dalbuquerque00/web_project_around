@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Site Social para compartilhar lugares visitados"
+    />
+    <meta name="author" content="Danilo Morais" />
+    <meta name="keywords" content="tripleTen" />
+    <title>Around the U.S</title>
+    <link rel="stylesheet" href="./pages/index.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <img src="images/logo.svg" alt="Logo do site" class="header__logo" />
+      </header>
+      <main class="content">
+        <section class="profile">
+          <div class="profile__avatar-container">
+            <img src="" alt="Imagem de perfil" class="profile__avatar" />
+            <div class="profile__avatar-edit"></div>
+          </div>
+          <h2 class="profile__info-title"></h2>
+          <h3 class="profile__info-subtitle"></h3>
+          <button class="profile__edit-button">
+            <img
+              src="images/Edit_Button.svg"
+              alt="Botão de edição de perfil"
+              class="profile__edit-icon"
+            />
+          </button>
+          <button class="button-add"></button>
+        </section>
+        <section class="elements"></section>
+        <div class="popup popup_edit">
+          <div class="popup__container">
+            <button type="button" class="popup__close"></button>
+            <h3 class="popup__title">Editar perfil</h3>
+            <form
+              id="edit_form"
+              class="popup__form"
+              name="edit-profile"
+              novalidate
+            >
+              <input
+                type="text"
+                name="name"
+                class="popup__input popup__input_name"
+                placeholder="Nome"
+                required
+                minlength="2"
+                maxlength="40"
+              />
+              <span class="popup__error name-error"></span>
+              <input
+                type="text"
+                name="job"
+                class="popup__input popup__input_job"
+                placeholder="Sobre mim"
+                required
+                minlength="2"
+                maxlength="200"
+              />
+              <span class="popup__error job-error"></span>
+              <button type="submit" class="popup__button" disabled>
+                Salvar
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="popup popup_add">
+          <div class="popup__container">
+            <button type="button" class="popup__close"></button>
+            <h3 class="popup__title">Novo local</h3>
+            <form id="add_form" class="popup__form" name="add-card" novalidate>
+              <input
+                type="text"
+                name="title"
+                class="popup__input popup__input_title"
+                placeholder="Título"
+                required
+                minlength="2"
+                maxlength="30"
+              />
+              <span class="popup__error title-error"></span>
+              <input
+                type="url"
+                name="link"
+                class="popup__input popup__input_link"
+                placeholder="Link da imagem"
+                required
+              />
+              <span class="popup__error link-error"></span>
+              <button type="submit" class="popup__button" disabled>
+                Adicionar
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="popup popup_image">
+          <div class="popup__preview">
+            <button type="button" class="popup__close"></button>
+            <img src="" alt="Imagem Expandida" class="popup__image" />
+            <h3 class="popup__description"></h3>
+          </div>
+        </div>
+        <div class="popup popup_delete-card">
+          <div class="popup__container">
+            <button type="button" class="popup__close"></button>
+            <h3 class="popup__title">Tem certeza?</h3>
+            <form
+              id="delete_form"
+              class="popup__form"
+              name="delete-card"
+              novalidate
+            >
+              <button type="submit" class="popup__button">Sim</button>
+            </form>
+          </div>
+        </div>
+        <div class="popup popup_avatar">
+          <div class="popup__container">
+            <button type="button" class="popup__close"></button>
+            <h3 class="popup__title">Alterar foto de perfil</h3>
+            <form
+              id="avatar_form"
+              class="popup__form"
+              name="update-avatar"
+              novalidate
+            >
+              <input
+                type="url"
+                name="avatar"
+                class="popup__input popup__input_avatar"
+                placeholder="Link da Imagem"
+                required
+              />
+              <span class="popup__error avatar-error"></span>
+              <button type="submit" class="popup__button" disabled>
+                Salvar
+              </button>
+            </form>
+          </div>
+        </div>
+        <template id="card-template">
+          <div class="elements__item">
+            <button type="button" class="elements__delete"></button>
+            <img class="elements__item-image" src="" alt="" />
+            <div class="elements__item-content">
+              <h2 class="elements__item-title"></h2>
+              <button type="button" class="elements__item-button">
+                <img
+                  src="images/like.svg"
+                  alt="Botão de like"
+                  class="elements__item-like"
+                />
+              </button>
+            </div>
+          </div>
+        </template>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyright">&copy; 2025 Around The U.S.</p>
+      </footer>
+    </div>
+    <script type="module" src="./pages/index.js"></script>
+  </body>
+</html>
